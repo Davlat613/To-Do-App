@@ -1,0 +1,36 @@
+#:kivy 2.3.0
+
+
+<MyGrid>
+
+    name: name
+    email: email
+
+    GridLayout:
+        cols: 1
+        size: root.width - 200, root.height - 200
+        pos: 100, 100
+
+        GridLayout:
+            cols: 2
+            Label:
+                text: "Name: "
+
+            TextInput:
+                id: name
+                hint_text: "Введите имя"
+                multiline: False
+
+            Label:
+                text:'Email: '
+            
+            TextInput:
+                id: email
+                hint_text: "Введите email"
+                multiline: False
+
+        Button:
+            text: 'Submit'
+            on_press: root.btn()
+
+    

@@ -1,0 +1,90 @@
+#:import hex kivy.utils.get_color_from_hex
+
+<Root>:
+    cols: 1
+    spacing: '10px'
+
+    canvas:
+        Color:
+            rgba: hex('#1f1f1f')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    GridLayout:    
+        cols: 2
+        padding: 10
+        size_hint_y: None
+        height: 100
+
+        canvas:
+            Color:
+                rgba: hex('#252525')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        
+
+        Image:
+            source: "image.png"
+            size_hint: 0.8, 0.8
+
+        Label:
+            text:'TO DO APP'
+            color: hex("#FDEEDC")
+            font_size: 24
+
+    
+    GridLayout:
+        cols: 1
+        padding: 10, 10
+        spacing: 10
+        size_hint_y: None
+        height: 115
+
+        canvas:
+            Color:
+                rgba: hex('#252525')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+
+        TextInput:
+            id: input_field
+            multiline: False                # Однолинейный ввод
+            size_hint_y: None               # Отключаем автоматическое изменение высоты
+            height: 40      # Высота по шрифту
+            font_size: 18                   # Размер шрифта
+            padding_y: [self.height / 2 - (self.line_height / 2), 0]  # Центрирование текста по вертикали
+            background_color: hex("#4F4F4F")  # Цвет фона (светло-серый)
+            foreground_color: 1, 1, 1, 1   # Цвет текста (черный)
+            cursor_color: hex("#FDEEDC")       # Цвет курсора (синий)
+
+        GridLayout:
+            cols: 3
+            spacing: 10
+            size_hint_y: None
+            height: 45
+
+            Button:
+                text: 'DO'
+                
+            Button:
+                text: 'DONT'
+
+            Button:
+                text: 'ADVANCED'
+    
+
+<TaskContainer>:
+    cols: 1
+    padding: 10, 10
+    spacing: '10px'
+    canvas:
+        Color:
+            rgba: hex('#252525')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        

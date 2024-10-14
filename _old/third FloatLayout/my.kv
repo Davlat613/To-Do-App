@@ -1,0 +1,16 @@
+#:kivy 2.3.0
+
+<Button>:
+    font_size: 40
+    size_hint: .3, .5
+
+<FloatLayout>:
+    Button:
+        pos_hint: {'x': 0.5,'top': 1}
+        text: "Tech with"
+    
+    Button: 
+        id: btn
+        pos_hint: {'y': 0.3,}
+        text: "Tim" if btn.state == 'normal' else 'Down'
+        background_color: .3, .4, .5, 1
