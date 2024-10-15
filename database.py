@@ -41,6 +41,14 @@ class Database:
         ''', (completed, task_id))
         self.connection.commit()  # Применение изменений
 
+    def delete_task(self, task_id):
+        """Удаляет задачу из базы данных по заданному идентификатору."""
+        with self.connection:
+            cursor = self.connection.cursor()
+            cursor.execute("DELETE FROM tasks WHERE id = ?", (task_id,))
+            self.connection.commit()
+
+
     def close(self):
         # Метод для закрытия соединения с базой данных
         self.connection.close()
