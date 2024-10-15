@@ -10,17 +10,16 @@ from database import Database
 
 
 class TaskContainer(GridLayout):
-    def __init__(self, **kwargs):
+    def __init__(self, db, **kwargs):
         super().__init__(**kwargs)
 
-        self.db = Database()
-        # Пример списка
-        tasks = self.db.get_tasks()
+        self.db = db
 
         # Метод для добавления пунктов
-        self.add_task_options(tasks)
+        self.add_task_options(self.db.get_tasks())
 
     def add_task_options(self, tasks):
+        self.clear_widgets()
         for task in tasks:
             # Создаём новый GridLayout для каждого пункта
             task_layout = GridLayout(cols=3, size_hint_y=None, height=40)
@@ -36,6 +35,7 @@ class TaskContainer(GridLayout):
 
             # Добавляем чекбокс
             checkbox = CheckBox(size_hint_x=0.1)
+            checkbox.bind(active=self.on_checkbox_active)
             task_layout.add_widget(checkbox)
 
             # Добавляем метку с названием задачи
@@ -58,16 +58,31 @@ class TaskContainer(GridLayout):
         instance.rect.pos = instance.pos
         instance.rect.size = instance.size
 
+    def on_checkbox_active(self, checkbox, value):
+        if value:
+            print("Checkbox is checked!")
+        else:
+            print("Checkbox is unchecked!")
+
 
     def callback_function(self, instance):
         print("More button pressed!")
 
 
+
 class Root(GridLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        task_container = TaskContainer()
-        self.add_widget(task_container)
+        self.db = Database()
+        self.task_container = TaskContainer(self.db)
+        self.add_widget(self.task_container)
+
+    def add_task(self):
+        title = self.ids.input_field.text
+        if title:
+            self.db.add_task(title, 'placeholder description')
+            self.ids.input_field.text = ''
+            self.task_container.add_task_options(self.db.get_tasks())
 
 class MyApp(App):
     def build(self):
