@@ -14,6 +14,7 @@ class Database:
             CREATE TABLE IF NOT EXISTS tasks (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 title TEXT NOT NULL,
+                is_do BOOLEAN NOT NULL DEFAULT 0,
                 description TEXT,
                 completed BOOLEAN NOT NULL DEFAULT 0,
                 due_date DATE
@@ -21,12 +22,12 @@ class Database:
         ''')
         self.connection.commit()  # Применение изменений к базе данных
 
-    def add_task(self, title, description, due_date=None):
+    def add_task(self, is_do, title, description, due_date=None):
         # Метод для добавления новой задачи в базу данных
         self.cursor.execute('''
-            INSERT INTO tasks (title, description, due_date)
-            VALUES (?, ?, ?)
-        ''', (title, description, due_date))
+            INSERT INTO tasks (title, is_do, description, due_date)
+            VALUES (?, ?, ?, ?)
+        ''', (title, is_do, description, due_date))
         self.connection.commit()  # Применение изменений
 
     def get_tasks(self):

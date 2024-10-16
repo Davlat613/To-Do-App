@@ -69,10 +69,11 @@
 
             Button:
                 text: 'DO'
-                on_press: root.add_task()
+                on_press: root.add_task(True)
 
             Button:
                 text: 'DONT'
+                on_press: root.add_task(False)
 
             Button:
                 text: 'ADVANCED'

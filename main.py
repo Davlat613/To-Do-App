@@ -4,7 +4,6 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.checkbox import CheckBox
-from kivy.uix.textinput import TextInput
 from kivy.graphics import Rectangle, Color
 from database import Database
 
@@ -75,10 +74,10 @@ class Root(GridLayout):
         
         self.add_widget(self.task_container)
 
-    def add_task(self):
+    def add_task(self, is_do):
         title = self.ids.input_field.text
         if title:
-            self.db.add_task(title, 'placeholder description')
+            self.db.add_task(is_do, title, 'placeholder description')
             self.ids.input_field.text = ''
             self.task_container.update_task_list()
 
